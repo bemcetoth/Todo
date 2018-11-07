@@ -41,7 +41,8 @@ class HomeController extends Controller
             $data = Todo::where('name','LIKE','%'.$request->search.'%')
                          ->orWhere('desc','LIKE','%'.$request->search.'%')
                         ->orWhere('user_id','LIKE','%'.$request->search)
-                        ->orderBy('updated_at', 'desc')
+                        ->orderBy('complete', 'desc')
+                        ->orderBy('updated_at', 'desc')                    
                         ->get();
             if ($data)
 
