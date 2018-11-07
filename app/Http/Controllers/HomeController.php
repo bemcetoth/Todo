@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Todo::where('user_id', Auth::id()) ->orderBy('updated_at', 'asc') -> paginate(7);
+        $data = Todo::where('user_id', Auth::id()) ->orderBy('updated_at', 'desc') -> paginate(7);
         return view('home')->with('data',$data);
     }
 
@@ -41,6 +41,7 @@ class HomeController extends Controller
             $data = Todo::where('name','LIKE','%'.$request->search.'%')
                          ->orWhere('desc','LIKE','%'.$request->search.'%')
                         ->orWhere('user_id','LIKE','%'.$request->search)
+                        ->orderBy('updated_at', 'desc')
                         ->get();
             if ($data)
 
