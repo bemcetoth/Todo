@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = Todo::where('user_id', Auth::id()) ->orderBy('id', 'desc') -> paginate(7);
+        $data = Todo::where('user_id', Auth::id()) ->orderBy('updated_at', 'asc') -> paginate(7);
         return view('home')->with('data',$data);
     }
 
@@ -38,33 +38,16 @@ class HomeController extends Controller
     {
         if ($request->ajax()) {
             $output="";
-            $data = Todo::where('name','LIKE','%'.$request->search.'%')->orWhere('desc','LIKE','%'.$request->search.'%')->orWhere('user_id','LIKE','%'.$request->search)->paginate(7);
+            $data = Todo::where('name','LIKE','%'.$request->search.'%')
+                         ->orWhere('desc','LIKE','%'.$request->search.'%')
+                        ->orWhere('user_id','LIKE','%'.$request->search)
+                        ->get();
             if ($data)
 
             {
-               foreach ($data as $key => $d) {
 
 
-                  $output.='<tr>'.
-                            '<td>'.$d->name.'</td>'.
-                            '<td>'.$d->desc.'</td>'.
-                            '<td>'.$d->updated_at->diffForHumans().'</td>'.
-                            '<td>'.$d->complete .'</td>'.
-                            '<td>
-
-
-                            
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-id ="'.$d->id.'}}" data-name ="'.$d->name.'" data-desc ="'.$d->desc.'">Edit</button><button type="button" class="btn btn-danger" data-toggle ="modal" data-target="#delete-modal" data-id = "'.$d->id.'">Delete</button>
-                             </td>
-                            </tr>';
-
-
-
-
-
-
-               }
-               return response($output);
+               return $data->toJson();
             }
         }
     }
@@ -73,7 +56,7 @@ class HomeController extends Controller
     {
         $name = $request->input('name');
         $desc = $request->input('desc');
-        $updated_at = "adssda";
+        $updated_at = Carbon::now();
 
         $insert = new Todo;
         $insert->name = $name;
@@ -89,6 +72,7 @@ class HomeController extends Controller
                     'name'=>$name,
                     'desc'=>$desc,
                     'complete'=>0,
+                    'updated_at'=>$updated_at->diffForHumans(),
 
 
         ]);
@@ -156,8 +140,8 @@ class HomeController extends Controller
      public function change(divid $request)
     {
         $id = $request->input('id');
-        
-      
+
+
 
         $data = Todo::find($id);
         $data->complete = !$data->complete;
@@ -168,11 +152,10 @@ class HomeController extends Controller
         return response()->json([
 
                     'id'=> $id
-                    
+
 
         ]);
 
     }
 
 }
-    

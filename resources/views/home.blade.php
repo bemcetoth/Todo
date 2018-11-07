@@ -66,36 +66,34 @@
                         </tr>
                   </thead>
                   <tbody>
-                      @foreach($data as $d)
-                      <tr id="todo-{{$d->id}}">
-                          <td id="name-{{$d->id}}">{{$d->name}}</td>
-                          <td id="desc-{{$d->id}}">{{$d->desc}}</td>
-                            <td id="updated_at-{{$d->id}}">{{ $d->updated_at->diffForHumans()}}</td>
-                            <td>
 
-                           <div class="switch m-b-md" id="{{$d->id}}" onclick="change('{{$d->id}}')">
-                             <label>
-                           @if($d->complete == '1')
-                            <input id="changeItem" type="checkbox" checked="">
-                             @else
-                                <input id="changeItem" type="checkbox">
-                              @endif
-                                <span class="lever"></span>
-                               </label>
-                             </div>
-
-
-                          <td id="button-{{$d->id}}">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-id ="{{$d->id}}" data-name ="{{$d->name}}" data-desc ="{{$d->desc}}">Edit</button><button type="button" class="btn btn-danger" data-toggle ="modal" data-target="#delete-modal" data-id = "{{$d->id}}">Delete</button>
-                        </td>
-                      </tr>
-                      @endforeach
                   </tbody>
                 </table>
             </div>
           </div>
     </div>
 </div>
+
+<style>
+
+    body{
+        font-family: 'Open Sans', sans-serif;
+        background: linear-gradient(90deg,#1a7d6f,#35bbae);
+    }
+
+    .title{
+        color: white;
+    }
+
+    .disc{
+        margin-left: 20px;
+    }
+
+    .text{
+        padding: 6px;
+    }
+
+    </style>
 
 
 
