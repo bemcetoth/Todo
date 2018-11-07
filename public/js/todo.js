@@ -107,3 +107,34 @@ $('#edit-modal').on('show.bs.modal',function(e){
     });
 });
 
+
+
+
+$('#delete-modal').on('show.bs.modal',function(e){
+
+
+    $('#delete-button').click(function(){
+
+        var id = $(e.relatedTarget).attr('data-id');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:'post',
+            url:'/delete',
+            data: {
+                id: id
+                },
+                success:function(response){
+                    $('#delete-modal').modal('hide');
+                    $('tbody').find('tr#todo-'+response.id).remove();
+
+                }
+        });
+
+    });
+});
