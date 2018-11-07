@@ -64,3 +64,46 @@
  $(document).ready(function() {
   Select();
 });
+
+
+
+
+
+
+
+
+
+// Edit
+
+$('#edit-modal').on('show.bs.modal',function(e){
+
+    $('#edit-form input[name=name]').val($(e.relatedTarget).attr('data-name'));
+    $('#edit-form input[name=id]').val($(e.relatedTarget).attr('data-id'));
+    $('#edit-form textarea').val($(e.relatedTarget).attr('data-desc'));
+
+    $('#edit-button').click(function(){
+
+        var data = $('#edit-form').serializeArray();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:'post',
+            url:'/edit',
+            data: data,
+            success:function(response){
+                $('#edit-modal').modal('hide');
+                $('tbody').find('td#name-'+response.id).text(response.name);
+                $('tbody').find('td#desc-'+response.id).text(response.desc);
+
+                $('tr#todo-'+response.id).find('button').attr('data-name', response.name);
+                $('tr#todo-'+response.id).find('button').attr('data-desc', response.desc);
+            }
+        });
+    });
+});
+
