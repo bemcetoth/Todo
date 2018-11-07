@@ -22,11 +22,9 @@ Route::post('/save', 'HomeController@save');
 Route::post('/edit', 'HomeController@edit');
 Route::post('/delete', 'HomeController@delete');
 Route::get('/search', 'HomeController@search');
-Route::put('/change', 'HomeController@change');
+Route::post('/change', 'HomeController@change');
 
 
 
 
 Route::Resource('store', 'HomeController@store');
-
-

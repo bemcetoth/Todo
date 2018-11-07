@@ -140,7 +140,7 @@
         </button>
       </div>
       <div class="modal-body">
-             <h2>Are you sure want delete this Todo?</h2>
+             <h3>Are you sure want delete this Todo?</h3>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

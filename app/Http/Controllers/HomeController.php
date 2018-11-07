@@ -137,7 +137,7 @@ class HomeController extends Controller
 
 
 
-     public function change(divid $request)
+    public function change(Request $request)
     {
         $id = $request->input('id');
 
@@ -147,12 +147,13 @@ class HomeController extends Controller
         $data->complete = !$data->complete;
         $data->save();
 
-        $id = $insert->id;
+        $id = $data->id;
+        $complete = $data->complete;
 
         return response()->json([
 
-                    'id'=> $id
-
+                    'id'=> $id,
+                    'complete' =>$complete
 
         ]);
 
