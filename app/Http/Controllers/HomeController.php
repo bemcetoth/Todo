@@ -42,7 +42,7 @@ class HomeController extends Controller
                          ->orWhere('desc','LIKE','%'.$request->search.'%')
                         ->orWhere('user_id','LIKE','%'.$request->search)
                         ->orderBy('complete', 'desc')
-                        ->orderBy('updated_at', 'desc')                    
+                        ->orderBy('updated_at', 'desc')
                         ->get();
             if ($data)
 

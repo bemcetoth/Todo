@@ -46,9 +46,9 @@
         var complete;
 
         if (data[i]["complete"]) {
-          complete = "uncomplete";
-        }else{
           complete = "complete";
+        }else{
+          complete = "uncomplete";
         }
         $('tbody').prepend('<tr id="todo-'+data[i]["id"]+'"><td id="name-'+data[i]["id"]+'">'+data[i]["name"]+'</td><td id="desc-'+data[i]["id"]+'">'+data[i]["desc"]+'</td><td>'+data[i]["updated_at"]+'</td><td>  <button type="button" class="btn btn-success changeItem" data-complete = "'+data[i]["complete"]+'" data-id ="'+data[i]["id"]+'">'+complete+'</button></td><td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" data-id ="'+data[i]["id"]+'" data-name ="'+data[i]["name"]+'" data-desc ="'+data[i]["desc"]+'">Edit</button><button type="button" class="btn btn-danger" data-toggle ="modal" data-target="#delete-modal" data-id ="'+data[i]["id"]+'">Delete</button></td></tr>')
 
@@ -161,9 +161,9 @@ $(document).on("click", ".changeItem", function() {
                 var complete;
 
                 if (data.complete) {
-                  complete = "uncomplete";
-                }else{
                   complete = "complete";
+                }else{
+                  complete = "uncomplete";
                 }
                 $(this).text(complete);
                 console.log(data.complete);
